@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     CheckBox s1, s2, s3, s4, s5, s6, s7, s8;
     EditText comments;
-    String subjs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,68 +35,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveData(View v) {
-        String comment1 = comments.getText().toString();
+        String comments1 = comments.getText().toString();
         String subjs = "";
         if (s1.isChecked()) {
-            subjs = subjs + s1.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s1.getText().toString();
         }
         if (s2.isChecked()) {
-            subjs = subjs + s2.getText().toString()+ " ";
+            subjs = " " + subjs + " "  + s2.getText().toString();
         }
         if (s3.isChecked()) {
-            subjs = subjs + s3.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s3.getText().toString();
         }
         if (s4.isChecked()) {
-            subjs = subjs + s4.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s4.getText().toString();
         }
         if (s5.isChecked()) {
-            subjs = subjs + s5.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s5.getText().toString();
         }
         if (s6.isChecked()) {
-            subjs = subjs + s6.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s6.getText().toString();
         }
         if (s7.isChecked()) {
-            subjs = subjs + s7.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s7.getText().toString();
         }
         if (s8.isChecked()) {
-            subjs = subjs + s8.getText().toString()+ " ";
+            subjs = " " + subjs + " " + s8.getText().toString();
         }
-        FileOutputStream writer = null;
-//                    try {
-//                        writer = openFileOutput("data1.txt", MODE_PRIVATE);
-//                        writer.write(data.getBytes());
-//                        writer.write(data1.getBytes());
-//                        writer.write(data2.getBytes());
-//                        writer.write(data3.getBytes());
-//                        writer.write(data4.getBytes());
-//                        writer.write(data5.getBytes());
-//                        writer.write(data6.getBytes());
-//                        writer.write(data7.getBytes());
-//                    } catch (FileNotFoundException e) {
-//                        Log.d("error", "File not found...");
-//                        //   e.printStackTrace();
-//                    } catch (IOException e) {
-//                        //   e.printStackTrace();
-//                        Log.d("error", "IO error");
-//                    } finally {
-//                        try {
-//                            writer.close();
-//                        } catch (IOException e) {
-//                            //  e.printStackTrace();
-//                            Log.d("error", "File not found...");
-//                        }
-//                    }
-//                    Toast.makeText(this, "Data saved..", Toast.LENGTH_LONG).show();
-                }
 
-                public void onClick(View v) {
-
+        FileOutputStream writer1 = null;
+        FileOutputStream writer2 = null;
+        try {
+            writer1= openFileOutput("data1.txt", MODE_PRIVATE);
+            writer2 = openFileOutput("data2.txt", MODE_PRIVATE);
+            writer2.write(comments1.getBytes());
+            writer1.write(subjs.getBytes());
+        } catch(FileNotFoundException e) {
+            Log.d("Error", "File not found.");
+        } catch (IOException e) {
+            Log.d("Error", "IO Error.");
+        } finally {
+            try {
+                writer1.close();
+                writer2.close();
+            } catch (IOException e) {
+                Log.d("Error", "File not found.");
             }
+        }
+        Toast.makeText(this, "Data saved..", Toast.LENGTH_LONG).show();
+    }
 
                 public void next (View v){
                 Intent i = new Intent(this, Screen2.class);
                 startActivity(i); }
 
-        }
+}
 
 

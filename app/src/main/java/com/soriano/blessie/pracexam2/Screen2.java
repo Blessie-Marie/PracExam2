@@ -17,22 +17,33 @@ import java.io.IOException;
 
 public class Screen2 extends AppCompatActivity {
 
-    TextView subjs;
+    //TextView subjs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen2);
-        subjs = findViewById(R.id.subjs);
 
-        FileInputStream reader = null;
-        String msg = "";
-        StringBuffer msg = null;
+        FileInputStream reader1 = null;
+        FileInputStream reader2 = null;
+        String msg1 = "";
+        String msg2 = "";
             try {
                 int token;
-                msg = new StringBuffer();
-                FileInputStream reader = openFileInput("data1.txt");
-                while ((token = reader.read()) != -1){
-                    msg.append((char)token);
+                reader1 = openFileInput("data1.txt");
+                reader2 = openFileInput("data2.txt");
+                while ((token = reader1.read()) != -1){
+                    msg1 = msg1 + (char)token;
+                }
+                while((token = reader2.read()) != -1){
+                    msg2 = msg2+ (char)token;
+                }
+                reader1.close();
+                reader2.close();
+                try {
+                    ((TextView) (findViewById(R.id.subjs))).setText(msg1);
+                    ((TextView) (findViewById(R.id.comments))).setText(msg2);
+                } catch(Exception e){
+
                 }
             } catch (FileNotFoundException e) {
                 //  e.printStackTrace();
@@ -41,7 +52,8 @@ public class Screen2 extends AppCompatActivity {
                 Log.d("error", "IO error..");
                 //  e.printStackTrace();
             }
-            Toast.makeText(this, msg.toString(), Toast.LENGTH_LONG).show();
+        //    Toast.makeText(this, msg1.toString(), Toast.LENGTH_LONG).show();
+       //     Toast.makeText(this, msg2.toString(), Toast.LENGTH_LONG).show();
         }
 
 
